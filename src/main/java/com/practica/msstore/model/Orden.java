@@ -2,14 +2,30 @@ package com.practica.msstore.model;
 
 import java.util.Date;
 
-public class Orden {
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "Ordenes")
+public class Orden {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String numero;
 	private Date FechaCreacion;
 	private Date FechaRecibida;
 	private double total;
 	
+	@ManyToOne
+	private Usuario usuario;
+	
+	@OneToOne(mappedBy = "orden")
+	private DetalleOrden detalle;
 	
 	public Orden() {
 		// TODO Auto-generated constructor stub
@@ -73,6 +89,27 @@ public class Orden {
 
 	public void setTotal(double total) {
 		this.total = total;
+	}
+
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+
+	
+	public DetalleOrden getDetalle() {
+		return detalle;
+	}
+
+
+	public void setDetalle(DetalleOrden detalle) {
+		this.detalle = detalle;
 	}
 
 
